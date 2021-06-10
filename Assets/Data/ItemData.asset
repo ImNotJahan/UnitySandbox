@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f1ace8ecd7344aaf7a2a8cdf4ba60, type: 3}
+  m_Name: ItemData
+  m_EditorClassIdentifier: 
+  itemValues:
+  - name: Null
+    itemType: 0
+    itemTexture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+    itemGameobject: {fileID: 0}
+    atk: 0
+    def: 0
+  - name: knife
+    itemType: 0
+    itemTexture: {fileID: 2800000, guid: 296451a6227e6bc4baa4ae3229e0a234, type: 3}
+    itemGameobject: {fileID: 919132149155446097, guid: 0801cbda15ad8564684ff7802ffce8ec,
+      type: 3}
+    atk: 5
+    def: 0
