@@ -16,6 +16,8 @@ public class PlayerMovementScript : MonoBehaviour
     [Range(1f, 10f)]
     public float jumpHeight = 3f;
 
+    public float level = 1;
+
     public Transform groundCheck;
 
     [Range(0.1f, 1f)]

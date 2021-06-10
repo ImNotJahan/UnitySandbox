@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class DiscordJoinEvent : UnityEngine.Events.UnityEvent<string> { }
@@ -11,10 +13,10 @@ public class DiscordJoinRequestEvent : UnityEngine.Events.UnityEvent<DiscordRpc.
 
 public class DiscordController : MonoBehaviour
 {
+    public static long int timestamp = 0;
     public DiscordRpc.RichPresence presence = new DiscordRpc.RichPresence();
     public string applicationId = "852535107906437140";
     public string optionalSteamId;
-    public int clickCounter;
     public DiscordRpc.DiscordUser joinRequest;
     public UnityEngine.Events.UnityEvent onConnect;
     public UnityEngine.Events.UnityEvent onDisconnect;
@@ -24,21 +26,6 @@ public class DiscordController : MonoBehaviour
     public DiscordJoinRequestEvent onJoinRequest;
 
     DiscordRpc.EventHandlers handlers;
-
-    public void OnClick()
-    {
-        Debug.Log("Discord: on click!");
-        clickCounter++;
-
-        presence.details = "Ayyy this works";
-        presence.joinSecret = "ae488379-351d-4a4f-ad32-2b9b01c91657";
-        presence.partyId = "MTI4NzM0OjFpMmhuZToxMjMxMjM";
-        presence.partySize = 1;
-        presence.partyMax = 3;
-        presence.partyPrivacy = DiscordRpc.PartyPrivacy.Public;
-
-        DiscordRpc.UpdatePresence(presence);
-    }
 
     public void RequestRespondYes()
     {
@@ -58,6 +45,27 @@ public class DiscordController : MonoBehaviour
     {
         Debug.Log(string.Format("Discord: connected to {0}#{1}: {2}", connectedUser.username, connectedUser.discriminator, connectedUser.userId));
         onConnect.Invoke();
+        CheckPresence("Choosing what to do");
+    }
+
+    public static void CheckPresence(string state)
+    {
+        int amountOfPlayers = 1;
+        DiscordRpc.RichPresence presence = new DiscordRpc.RichPresence();
+
+        presence.state = state;
+        presence.details = amountOfPlayers == 1 ? "Solo" : "In a party";
+        presence.startTimestamp = timestamp;
+        presence.endTimestamp = 0;
+        presence.smallImageText = "ImNotJahan";
+        presence.largeImageText = "Level 1";
+        presence.largeImageKey = "main";
+        presence.partyId = "ae488379-351d-4a4f-ad32-2b9b01c91657";
+        presence.partySize = amountOfPlayers;
+        presence.partyMax = 5;
+        presence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
+
+        DiscordRpc.UpdatePresence(presence);
     }
 
     public void DisconnectedCallback(int errorCode, string message)
@@ -92,6 +100,7 @@ public class DiscordController : MonoBehaviour
 
     void Start()
     {
+        timestamp = (int)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
     }
 
     void Update()

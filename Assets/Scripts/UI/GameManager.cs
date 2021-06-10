@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
         scenesLoading.Add(SceneManager.UnloadSceneAsync(1));
         scenesLoading.Add(SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive)); //game
 
+        DiscordController.CheckPresence("Exploring the world");
+
         StartCoroutine(GetSceneLoadProgress());
     }
 
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         scenesLoading.Add(SceneManager.UnloadSceneAsync(2));
         scenesLoading.Add(SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive)); //menu
+        DiscordController.CheckPresence("Choosing what to do");
     }
 
     float totalSceneProgress;
