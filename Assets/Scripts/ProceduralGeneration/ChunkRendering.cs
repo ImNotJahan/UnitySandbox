@@ -248,7 +248,7 @@ public class ChunkRendering : MonoBehaviour
 
                         ChunkRendering cr = instance;
 
-                        for(int k = 0; k < mapGenerator.spawnablePrefabs.Length; k++)
+                        for (int k = 0; k < mapGenerator.spawnablePrefabs.Length; k++)
                         {
                             PrefabSpawner.Generate(mapGenerator.spawnablePrefabs[0], new Vector2(cr.chunkSize, cr.chunkSize), mapGenerator.terrainData.meshHeightCurve[k], mapData.heightMap, new Vector3(meshCollider.transform.position.x, 0, meshCollider.transform.position.z), meshCollider.transform, mapGenerator.terrainData.reducingSize, mapGenerator.terrainData.meshHeightMultiplier, mapGenerator.layerMask, mapGenerator.terrainData.uniformScale);
                         }
